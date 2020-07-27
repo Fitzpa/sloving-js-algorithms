@@ -1,4 +1,4 @@
-const divide = require('./index')
+const divide = require('./solved')
 
 
 

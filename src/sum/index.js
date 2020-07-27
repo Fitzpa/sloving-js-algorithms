@@ -1,6 +1,5 @@
+// Write a function that takes two integers and returns the sum
+
 function sum(a, b) {
-  return a + b;
 }
 module.exports = sum;
-
-console.log(`sum = ${sum(5, 2)}`)
