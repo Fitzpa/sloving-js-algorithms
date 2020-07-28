@@ -32,6 +32,8 @@ or
 
 ```npm test``
 
+If a problem has not been solved it will not contain a '''solved.js''' file in it's folder. Each time a problem is solved with a solution or a faster solution, if one already exists, a '''solved.js''' file should be added or updated, the index.js file's solution should be removed and the '''index.test.js''' file should be commented out until it's next use.
+
 ## Future Plans
 * To set up a Jest script to watch files
 * Add many more questions

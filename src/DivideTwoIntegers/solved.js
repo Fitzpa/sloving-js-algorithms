@@ -21,15 +21,20 @@
 // Assume we are dealing with an environment which could only store integers within the 32-bit signed integer range: [−231,  231 − 1]. For the purpose of this problem, assume that your function returns 231 − 1 when the division result overflows.
 // Accept
 
-var divide = function (dividend, divisor) {
+const divide = function (dividend, divisor) {
     let quotient = 0;
+    const quotientLimit = Math.pow(2, 31);
 
     if (dividend === divisor && divisor !== 0) {
         quotient = 1;
-    } else if (dividend === -divisor && divisor !== 0 || -dividend === divisor && divisor !== 0) {
-        quotient = -1;
     } else if (divisor === 0) {
         quotient = undefined;
+    } else if (divisor === 1) {
+        quotient = dividend;
+    } else if (divisor === -1) {
+        quotient = -dividend;
+    } else if (dividend === -divisor && divisor !== 0 || -dividend === divisor && divisor !== 0) {
+        quotient = -1;
     } else if (dividend === 0 && divisor !== 0) {
         quotient = 0;
     } else if (dividend > divisor || dividend < divisor) {
@@ -39,7 +44,7 @@ var divide = function (dividend, divisor) {
             divisor = -divisor;
             dividend = -dividend;
             if (dividend > divisor) {
-                while (dividend > divisor) {
+                while (dividend >= divisor) {
                     dividend = dividend - divisor;
                     count++
                 }
@@ -52,7 +57,7 @@ var divide = function (dividend, divisor) {
         else if (divisor < 0 && dividend > 0) {
             divisor = -divisor;
             if (dividend > divisor) {
-                while (dividend > divisor) {
+                while (dividend >= divisor) {
                     dividend = dividend - divisor;
                     count++
                 }
@@ -64,7 +69,7 @@ var divide = function (dividend, divisor) {
         else if (divisor > 0 && dividend < 0) {
             dividend = -dividend;
             if (dividend > divisor) {
-                while (dividend > divisor) {
+                while (dividend >= divisor) {
                     dividend = dividend - divisor;
                     count++
                 }
@@ -75,7 +80,7 @@ var divide = function (dividend, divisor) {
         }
         else if (divisor > 0 && dividend > 0) {
             if (dividend > divisor) {
-                while (dividend > divisor) {
+                while (dividend >= divisor) {
                     dividend = dividend - divisor;
                     count++
                 }
@@ -85,7 +90,13 @@ var divide = function (dividend, divisor) {
             }
         }
     }
+    
+    if (quotient >= quotientLimit) {
+        quotient = quotientLimit - 1
+    } else if (quotient < -quotientLimit) {
+        quotient = -quotientLimit
+    }
+
     return quotient
 };
-
 module.exports = divide;
